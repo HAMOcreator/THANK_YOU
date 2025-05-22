@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Děkujeme za platbu!</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top, #ffd6d6 0%, #ffeebb 100%);
+      font-family: 'Luckiest Guy', cursive;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 4em;
+      text-align: center;
+      margin-top: 30px;
+      color: #ff007f;
+      text-shadow:
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+    }
+
+    .truck {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 1000px;
+      z-index: 1;
+      border: 4px solid black;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .truck.hidden {
+      opacity: 0;
+    }
+
+    .logo {
+      position: absolute;
+      width: 80px;
+      transition: all 0.8s ease-in-out;
+      z-index: 2;
+      border: 4px solid black;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      background: white;
+      border-radius: 8px;
+    }
+
+    .logo.move-center {
+      top: 50% !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) scale(3.2) !important;
+      z-index: 5;
+    }
+
+    .logo.l1 { top: 20%; left: 5%; }
+    .logo.l2 { top: 40%; left: 5%; }
+    .logo.r1 { top: 20%; right: 5%; }
+    .logo.r2 { top: 50%; right: 5%; }
+
+  </style>
+</head>
+<body>
+  <h1>DĚKUJEME ZA PLATBU!</h1>
+  <div class="container">
+    <img src="images/food_truck.jpg" class="truck" id="truck" alt="Food Truck">
+
+    <img src="images/logo1.jpg" class="logo l1" id="logo1">
+    <img src="images/logo2.jpg" class="logo l2" id="logo2">
+    <img src="images/logo3.jpg" class="logo r1" id="logo3">
+    <img src="images/logo4.jpg" class="logo r2" id="logo4">
+  </div>
+
+  <script>
+    const logos = ["logo1", "logo2", "logo3", "logo4"];
+    let index = 0;
+    const truck = document.getElementById("truck");
+
+    setInterval(() => {
+      const current = document.getElementById(logos[index]);
+      truck.classList.add("hidden");
+      current.classList.add("move-center");
+
+      setTimeout(() => {
+        current.classList.remove("move-center");
+        truck.classList.remove("hidden");
+      }, 4000);
+
+      index = (index + 1) % logos.length;
+    }, 10000);
+  </script>
+</body>
+</html>
